@@ -1,0 +1,2 @@
+# BoilerPlateNodeServer
+A simple readily available server for making requests via mobile apps or web apps. We often need to test upload or get a ready made json available to us for testin, this is where this app will come handy.

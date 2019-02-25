@@ -1,0 +1,19 @@
+{
+  "name": "evac_server",
+  "version": "1.0.0",
+  "description": "Backend Server for generic app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server",
+    "start-dev": "nodemon --exec npm start"
+  },
+  "dependencies": {
+    "express": "*",
+    "multer": "*",
+    "nodemon": "*",
+    "request": "*"
+  },
+  "author": "Tirthankar Kundu",
+  "license": "ISC"
+}
