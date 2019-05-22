@@ -4,6 +4,20 @@ const app = express();
 const path = require("path");
 const request = require("request");
 const fs = require("fs");
+const bodyParser = require("body-parser");
+
+/** bodyParser.urlencoded(options)
+ * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
+ * and exposes the resulting object (containing the keys and values) on req.body
+ */
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+/**bodyParser.json(options)
+ * Parses the text as JSON and exposes the resulting object on req.body.
+ */
+app.use(bodyParser.json());
 
 //Handle Errors
 const handleError = (err, res) => {
@@ -24,6 +38,11 @@ const upload = multer({
 //Show the index page for uploading files. Nothing fancy with design
 app.get("/upload", (req, res) => {
   res.sendFile(__dirname + '/index.html');
+})
+
+app.post("/chat", (req, res) => {
+  console.log("hi", req.body);
+  res.send("Hi");
 })
 
 app.get("/posts", (req, res) => {
@@ -53,9 +72,11 @@ app.post(
           "./upload/" + req.file.originalname
         );
       });
-      a = new Object();
-      a['status'] = "done";
-      res.status(201).json(a);
+      let response = new Object();
+      response.status = "Success";
+      // response.status = "Error";
+      response.message = "Successfully saved the file";
+      res.status(201).json(response);
     } else {
       fs.unlink(tempPath, err => {
         if (err) return handleError(err, res);
